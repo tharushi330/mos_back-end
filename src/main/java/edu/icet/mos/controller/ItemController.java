@@ -2,6 +2,7 @@ package edu.icet.mos.controller;
 
 import edu.icet.mos.dto.Item;
 import edu.icet.mos.service.ItemService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +17,12 @@ public class ItemController {
     final ItemService service;
 
     @PostMapping("/add")
-    public void addItem(@RequestBody Item item) {
-        service.add(item.getName(),item.getPrice(),item.getImage());
+    public void addItem(@Valid @RequestBody Item item) {
+        service.add(item.getName(), item.getPrice(), item.getImage());
     }
 
     @PutMapping("/update/{id}")
-    public void updateItem(@RequestBody Item item, @PathVariable Integer id) {
+    public void updateItem(@Valid @RequestBody Item item, @PathVariable Integer id) {
         service.update(item, id);
     }
 

@@ -2,6 +2,7 @@ package edu.icet.mos.controller;
 
 import edu.icet.mos.dto.Order;
 import edu.icet.mos.service.OrderService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class OrderController {
     final OrderService service;
 
     @PostMapping("/add")
-    public void addOrder(@RequestBody Order order) {
+    public void addOrder(@Valid @RequestBody Order order) {
         System.out.println(order);
         service.add(order);
     }
@@ -37,7 +38,7 @@ public class OrderController {
     }
 
     @PutMapping("/update")
-    public void update(@RequestBody Order order) {
+    public void update(@Valid @RequestBody Order order) {
         service.update(order);
     }
 

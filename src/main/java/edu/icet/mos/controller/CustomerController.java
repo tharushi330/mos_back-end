@@ -3,6 +3,7 @@ package edu.icet.mos.controller;
 
 import edu.icet.mos.dto.Customer;
 import edu.icet.mos.service.CustomerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +19,13 @@ public class CustomerController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCustomer(@RequestBody Customer customer) {
-
+    public void addCustomer(@Valid @RequestBody Customer customer) {
         service.addCustomer(customer);
     }
 
     @PutMapping("/update/{id}")
-    public void updateCustomer(@RequestBody Customer customer, @PathVariable Integer id) {
-        service.updateCustomer(customer,id);
+    public void updateCustomer(@Valid @RequestBody Customer customer, @PathVariable Integer id) {
+        service.updateCustomer(customer, id);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -34,12 +34,12 @@ public class CustomerController {
     }
 
     @GetMapping("/get-all")
-    List<Customer> getAll() {
+    public List<Customer> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/search-by-id/{id}")
-    List<Customer> searchById(@PathVariable Integer id) {
+    public List<Customer> searchById(@PathVariable Integer id) {
         return service.searchById(id);
     }
 }
